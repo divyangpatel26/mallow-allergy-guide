@@ -13,7 +13,7 @@ const AllergiesPage = () => {
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [showAllDishes, setShowAllDishes] = useState(true);
+  const [showAllDishes, setShowAllDishes] = useState(false); // Changed default to false (safe dishes only)
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [onionGarlicFree, setOnionGarlicFree] = useState(false);
