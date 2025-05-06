@@ -63,7 +63,7 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
           )}
         </div>
         
-        {/* Allergen Icons */}
+        {/* Allergen Tags - removed icons */}
         {dishAllergenInfo.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1">
             {dishAllergenInfo.map((allergen) => (
@@ -76,7 +76,7 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
                 }`}
                 title={allergen.name}
               >
-                {allergen.icon} {allergen.name}
+                {allergen.name}
               </span>
             ))}
           </div>
