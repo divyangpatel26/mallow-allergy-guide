@@ -1,6 +1,5 @@
-
 import { supabase } from "@/integrations/supabase/client";
-import { Allergen, Dish } from "../types/types";
+import { Allergen, Dish, Category } from "../types/types";
 
 // Fetch all allergens
 export async function getAllergens(): Promise<Allergen[]> {
@@ -77,4 +76,24 @@ export async function getDishes(): Promise<Dish[]> {
   
   // Filter out any null values from dishes that had errors
   return dishes.filter(dish => dish !== null) as Dish[];
+}
+
+// Fetch all active categories ordered by display_order
+export async function getCategories(): Promise<Category[]> {
+  const { data, error } = await supabase
+    .from('categories')
+    .select('*')
+    .eq('is_active', true)
+    .order('display_order');
+  
+  if (error) {
+    console.error("Error fetching categories:", error);
+    return [];
+  }
+  
+  return data.map((category) => ({
+    id: category.slug,
+    label: category.name,
+    displayOrder: category.display_order
+  }));
 }

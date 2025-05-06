@@ -4,6 +4,7 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Search, Filter, Ban } from 'lucide-react';
 import { Switch } from './ui/switch';
+import { Category } from '../types/types';
 
 interface FilterControlsProps {
   searchTerm: string;
@@ -14,6 +15,7 @@ interface FilterControlsProps {
   onShowAllChange: (showAll: boolean) => void;
   onionGarlicFree?: boolean;
   onOnionGarlicFreeChange?: (value: boolean) => void;
+  categories: Category[];
 }
 
 const FilterControls = ({
@@ -25,19 +27,8 @@ const FilterControls = ({
   onShowAllChange,
   onionGarlicFree = false,
   onOnionGarlicFreeChange,
+  categories,
 }: FilterControlsProps) => {
-  const categories = [
-    { id: 'all', label: 'All' },
-    { id: 'starters', label: 'Starters' },
-    { id: 'mains', label: 'Mains' },
-    { id: 'desserts', label: 'Desserts' },
-    { id: 'drinks', label: 'Drinks' },
-    { id: 'breakfast', label: 'Breakfast' },
-    { id: 'weekend_brunch', label: 'Weekend Brunch' },
-    { id: 'market_menu_lunch', label: 'Market Menu (Lunch)' },
-    { id: 'market_menu_dinner', label: 'Market Menu (Dinner)' },
-  ];
-
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <div className="space-y-4">
@@ -72,7 +63,7 @@ const FilterControls = ({
           </div>
         </div>
 
-        {/* Category Filters */}
+        {/* Category Filters - Now using dynamic categories */}
         <div className="flex items-center space-x-2 overflow-x-auto pb-2">
           <Filter size={16} className="text-gray-500" />
           <span className="text-gray-500 font-medium">Filter:</span>

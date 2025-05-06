@@ -4,27 +4,30 @@ import DishModal from '../components/DishModal';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { Dish, Allergen } from '../types/types';
-import { getDishes, getAllergens } from '../services/supabaseService';
+import { Dish, Allergen, Category } from '../types/types';
+import { getDishes, getAllergens, getCategories } from '../services/supabaseService';
 
 const Menu = () => {
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dishes, setDishes] = useState<Dish[]>([]);
   const [allergens, setAllergens] = useState<Allergen[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch dishes and allergens on component mount
+  // Fetch dishes, allergens and categories on component mount
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
       try {
-        const [dishesData, allergensData] = await Promise.all([
+        const [dishesData, allergensData, categoriesData] = await Promise.all([
           getDishes(),
-          getAllergens()
+          getAllergens(),
+          getCategories()
         ]);
         setDishes(dishesData);
         setAllergens(allergensData);
+        setCategories(categoriesData.filter(category => category.id !== 'all'));
       } catch (error) {
         console.error('Error loading data:', error);
       } finally {
@@ -34,17 +37,6 @@ const Menu = () => {
     
     loadData();
   }, []);
-
-  const categories = [
-    { id: 'starters', name: 'Starters' },
-    { id: 'mains', name: 'Mains' },
-    { id: 'desserts', name: 'Desserts' },
-    { id: 'drinks', name: 'Drinks' },
-    { id: 'breakfast', name: 'Breakfast' },
-    { id: 'weekend_brunch', name: 'Weekend Brunch' },
-    { id: 'market_menu_lunch', name: 'Market Menu (Lunch)' },
-    { id: 'market_menu_dinner', name: 'Market Menu (Dinner)' },
-  ];
 
   const showDishDetails = (dish: Dish) => {
     setSelectedDish(dish);
@@ -84,7 +76,7 @@ const Menu = () => {
               return (
                 <div key={category.id} className="scroll-mt-24" id={category.id}>
                   <h2 className="text-2xl md:text-3xl font-playfair font-bold mb-8 pb-2 border-b border-gray-200">
-                    {category.name}
+                    {category.label}
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {categoryDishes.map((dish) => (

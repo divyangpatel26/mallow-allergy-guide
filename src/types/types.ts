@@ -15,3 +15,9 @@ export interface Dish {
   ingredients: string[];
   onion_garlic_free?: boolean;
 }
+
+export interface Category {
+  id: string;     // Slug field from database
+  label: string;  // Name field from database
+  displayOrder: number;
+}

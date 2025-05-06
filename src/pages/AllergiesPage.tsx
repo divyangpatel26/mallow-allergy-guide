@@ -4,9 +4,9 @@ import AllergenSelector from '../components/AllergenSelector';
 import FilterControls from '../components/FilterControls';
 import DishCard from '../components/DishCard';
 import DishModal from '../components/DishModal';
-import { Dish, Allergen } from '../types/types';
+import { Dish, Allergen, Category } from '../types/types';
 import { useToast } from '../components/ui/use-toast';
-import { getAllergens, getDishes } from '../services/supabaseService';
+import { getAllergens, getDishes, getCategories } from '../services/supabaseService';
 
 const AllergiesPage = () => {
   const { toast } = useToast();
@@ -21,6 +21,7 @@ const AllergiesPage = () => {
   // State for data from Supabase
   const [allergens, setAllergens] = useState<Allergen[]>([]);
   const [dishes, setDishes] = useState<Dish[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Fetch data from Supabase
@@ -28,17 +29,19 @@ const AllergiesPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const [allergensData, dishesData] = await Promise.all([
+        const [allergensData, dishesData, categoriesData] = await Promise.all([
           getAllergens(),
           getDishes(),
+          getCategories(),
         ]);
         setAllergens(allergensData);
         setDishes(dishesData);
+        setCategories(categoriesData);
       } catch (error) {
         console.error("Error fetching data:", error);
         toast({
           title: "Error",
-          description: "Failed to load allergens and dishes. Please try again later.",
+          description: "Failed to load data. Please try again later.",
           variant: "destructive",
         });
       } finally {
@@ -145,6 +148,7 @@ const AllergiesPage = () => {
               onShowAllChange={setShowAllDishes}
               onionGarlicFree={onionGarlicFree}
               onOnionGarlicFreeChange={setOnionGarlicFree}
+              categories={categories}
             />
 
             {/* Results Status */}
