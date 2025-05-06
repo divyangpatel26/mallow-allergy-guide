@@ -28,17 +28,9 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
     dish.allergens.includes(allergen.id)
   );
 
-  // Function to handle clicking on the dish card
-  const handleDishClick = () => {
-    showDetails(dish);
-  };
-
   return (
     <div className="dish-card group animate-scale-in bg-white rounded-lg shadow-md overflow-hidden">
-      <div 
-        className="aspect-w-16 aspect-h-9 overflow-hidden bg-gray-100 cursor-pointer" 
-        onClick={handleDishClick}
-      >
+      <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-gray-100">
         <img 
           src={dish.image} 
           alt={dish.name} 
@@ -48,12 +40,7 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
       
       <div className="p-5">
         <div className="flex justify-between items-start">
-          <h3 
-            className="font-playfair text-lg font-semibold text-gray-800 cursor-pointer hover:text-mallow-green transition-colors"
-            onClick={handleDishClick}
-          >
-            {dish.name}
-          </h3>
+          <h3 className="font-playfair text-lg font-semibold text-gray-800">{dish.name}</h3>
           
           {/* Safe/Unsafe indicator */}
           {selectedAllergens.length > 0 && (
@@ -65,12 +52,7 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
           )}
         </div>
         
-        <p 
-          className="mt-2 text-gray-600 line-clamp-2 cursor-pointer hover:text-gray-900 transition-colors" 
-          onClick={handleDishClick}
-        >
-          {dish.description}
-        </p>
+        <p className="mt-2 text-gray-600 line-clamp-2">{dish.description}</p>
         
         {/* Dietary info */}
         <div className="mt-2 flex flex-wrap gap-1">
@@ -81,7 +63,7 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
           )}
         </div>
         
-        {/* Allergen Tags - made clickable */}
+        {/* Allergen Tags - removed icons */}
         {dishAllergenInfo.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1">
             {dishAllergenInfo.map((allergen) => (
@@ -91,11 +73,8 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
                   selectedAllergens.includes(allergen.id) 
                     ? 'bg-red-100 text-red-800' 
                     : 'bg-gray-100 text-gray-600'
-                } cursor-pointer hover:opacity-80 transition-opacity`}
+                }`}
                 title={allergen.name}
-                onClick={handleDishClick}
-                role="button"
-                aria-label={`View details for ${dish.name} which contains ${allergen.name}`}
               >
                 {allergen.name}
               </span>
@@ -104,7 +83,7 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
         )}
         
         <Button 
-          onClick={handleDishClick} 
+          onClick={() => showDetails(dish)} 
           variant="outline"
           className="mt-4 w-full hover:bg-mallow-green-light"
         >
