@@ -12,19 +12,16 @@ export type Database = {
       allergens: {
         Row: {
           created_at: string
-          icon: string
           id: string
           name: string
         }
         Insert: {
           created_at?: string
-          icon: string
           id?: string
           name: string
         }
         Update: {
           created_at?: string
-          icon?: string
           id?: string
           name?: string
         }

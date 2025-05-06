@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Dish, Allergen } from '../types/types';
 import {
@@ -62,7 +61,7 @@ const DishModal = ({ dish, isOpen, onClose, selectedAllergens, allergenList }: D
             </ul>
           </div>
           
-          {/* Allergens - Removed icons */}
+          {/* Allergens - without icons */}
           <div>
             <h4 className="font-playfair text-lg font-semibold mb-2">Allergen Information</h4>
             

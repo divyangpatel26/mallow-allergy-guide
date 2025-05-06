@@ -2,7 +2,6 @@
 export interface Allergen {
   id: string;
   name: string;
-  icon: string;
 }
 
 export interface Dish {

@@ -1,4 +1,3 @@
-
 import { supabase } from "@/integrations/supabase/client";
 import { Allergen, Dish, Category } from "../types/types";
 
@@ -15,8 +14,7 @@ export async function getAllergens(): Promise<Allergen[]> {
   
   return data.map((allergen) => ({
     id: allergen.id,
-    name: allergen.name,
-    icon: allergen.icon
+    name: allergen.name
   }));
 }
 
@@ -37,7 +35,7 @@ export async function getDishes(): Promise<Dish[]> {
     // Get dish allergens
     const { data: allergenData, error: allergenError } = await supabase
       .from('dish_allergens')
-      .select('allergen_id, allergens(id, name, icon)')
+      .select('allergen_id, allergens(id, name)')
       .eq('dish_id', dish.id);
     
     if (allergenError) {
