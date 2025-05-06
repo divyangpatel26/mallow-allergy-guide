@@ -96,6 +96,42 @@ export type Database = {
           },
         ]
       }
+      dish_categories: {
+        Row: {
+          category_id: string
+          created_at: string
+          dish_id: string
+          id: string
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          dish_id: string
+          id?: string
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          dish_id?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dish_categories_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "dish_categories_dish_id_fkey"
+            columns: ["dish_id"]
+            isOneToOne: false
+            referencedRelation: "dishes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       dish_ingredients: {
         Row: {
           created_at: string
@@ -134,7 +170,6 @@ export type Database = {
       }
       dishes: {
         Row: {
-          category: Database["public"]["Enums"]["dish_category"]
           created_at: string
           description: string
           id: string
@@ -144,7 +179,6 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          category: Database["public"]["Enums"]["dish_category"]
           created_at?: string
           description: string
           id?: string
@@ -154,7 +188,6 @@ export type Database = {
           updated_at?: string
         }
         Update: {
-          category?: Database["public"]["Enums"]["dish_category"]
           created_at?: string
           description?: string
           id?: string

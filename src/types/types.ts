@@ -10,7 +10,7 @@ export interface Dish {
   name: string;
   description: string;
   image: string;
-  category: string;
+  categories: string[];  // Changed from category (single) to categories (array)
   allergens: string[];
   ingredients: string[];
   onion_garlic_free?: boolean;

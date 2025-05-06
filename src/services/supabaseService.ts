@@ -1,3 +1,4 @@
+
 import { supabase } from "@/integrations/supabase/client";
 import { Allergen, Dish, Category } from "../types/types";
 
@@ -31,7 +32,7 @@ export async function getDishes(): Promise<Dish[]> {
     return [];
   }
   
-  // For each dish, fetch its allergens
+  // For each dish, fetch its allergens, categories, and ingredients
   const dishes = await Promise.all(dishesData.map(async (dish) => {
     // Get dish allergens
     const { data: allergenData, error: allergenError } = await supabase
@@ -41,6 +42,17 @@ export async function getDishes(): Promise<Dish[]> {
     
     if (allergenError) {
       console.error(`Error fetching allergens for dish ${dish.id}:`, allergenError);
+      return null;
+    }
+
+    // Get dish categories
+    const { data: categoryData, error: categoryError } = await supabase
+      .from('dish_categories')
+      .select('category_id')
+      .eq('dish_id', dish.id);
+    
+    if (categoryError) {
+      console.error(`Error fetching categories for dish ${dish.id}:`, categoryError);
       return null;
     }
 
@@ -61,13 +73,16 @@ export async function getDishes(): Promise<Dish[]> {
     // Map the allergen IDs to an array
     const allergens = allergenData.map(item => item.allergen_id);
     
-    // Return the dish with allergens and ingredients
+    // Map the category IDs to an array
+    const categories = categoryData.map(item => item.category_id);
+    
+    // Return the dish with allergens, categories, and ingredients
     return {
       id: dish.id,
       name: dish.name,
       description: dish.description,
       image: dish.image,
-      category: dish.category,
+      categories: categories,
       allergens: allergens,
       ingredients: ingredients,
       onion_garlic_free: dish.onion_garlic_free || false
@@ -92,7 +107,7 @@ export async function getCategories(): Promise<Category[]> {
   }
   
   return data.map((category) => ({
-    id: category.slug,
+    id: category.id,
     label: category.name,
     displayOrder: category.display_order
   }));

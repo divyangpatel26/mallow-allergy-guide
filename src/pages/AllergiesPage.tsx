@@ -87,10 +87,10 @@ const AllergiesPage = () => {
           ingredient.toLowerCase().includes(searchTerm.toLowerCase())
         );
       
-      // Filter by category
+      // Filter by category - now checks if the dish belongs to any of the selected categories
       const matchesCategory = 
         selectedCategory === 'all' || 
-        dish.category === selectedCategory;
+        dish.categories.includes(selectedCategory);
       
       // Filter by onion & garlic free
       const matchesOnionGarlicFree = 

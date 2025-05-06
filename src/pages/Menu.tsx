@@ -69,7 +69,10 @@ const Menu = () => {
           /* Menu Categories */
           <div className="space-y-16 max-w-6xl mx-auto">
             {categories.map((category) => {
-              const categoryDishes = dishes.filter(dish => dish.category === category.id);
+              // For each category, filter dishes that belong to this category
+              const categoryDishes = dishes.filter(dish => 
+                dish.categories.includes(category.id)
+              );
               
               if (categoryDishes.length === 0) return null;
               
