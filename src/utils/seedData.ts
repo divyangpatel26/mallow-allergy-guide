@@ -1,5 +1,8 @@
 
 import { supabase } from "@/integrations/supabase/client";
+import { Database } from "@/integrations/supabase/types"; 
+
+type DishCategory = Database['public']['Enums']['dish_category'];
 
 // Sample dish data
 const sampleDishes = [
@@ -7,7 +10,7 @@ const sampleDishes = [
     name: 'Mushroom Risotto',
     description: 'Creamy arborio rice with wild mushrooms and truffle oil',
     image: 'https://images.unsplash.com/photo-1476124369491-e7addf5db371',
-    category: 'mains',
+    category: 'mains' as DishCategory,
     allergens: ['Gluten', 'Dairy'],
     ingredients: ['Arborio rice', 'Wild mushrooms', 'White wine', 'Vegetable stock', 'Parmesan', 'Truffle oil', 'Herbs']
   },
@@ -15,7 +18,7 @@ const sampleDishes = [
     name: 'Avocado Toast',
     description: 'Smashed avocado on sourdough with microgreens and chili flakes',
     image: 'https://images.unsplash.com/photo-1603046891744-76bbd9f4dfe7',
-    category: 'starters',
+    category: 'starters' as DishCategory,
     allergens: ['Gluten'],
     ingredients: ['Sourdough bread', 'Avocado', 'Lemon juice', 'Chili flakes', 'Sea salt', 'Microgreens']
   },
@@ -23,7 +26,7 @@ const sampleDishes = [
     name: 'Quinoa Buddha Bowl',
     description: 'Nutrient-rich bowl with roasted vegetables and tahini dressing',
     image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd',
-    category: 'mains',
+    category: 'mains' as DishCategory,
     allergens: ['Sesame', 'Nuts'],
     ingredients: ['Quinoa', 'Roasted sweet potato', 'Broccoli', 'Chickpeas', 'Avocado', 'Tahini', 'Mixed seeds', 'Almonds']
   },
@@ -31,7 +34,7 @@ const sampleDishes = [
     name: 'Chocolate Mousse',
     description: 'Rich dark chocolate mousse with raspberry coulis',
     image: 'https://images.unsplash.com/photo-1511715112108-9acc5d89e861',
-    category: 'desserts',
+    category: 'desserts' as DishCategory,
     allergens: ['Dairy', 'Soy'],
     ingredients: ['Dark chocolate', 'Heavy cream', 'Egg whites', 'Sugar', 'Vanilla extract', 'Raspberries']
   }
