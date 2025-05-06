@@ -45,7 +45,11 @@ const AllergenSelector = ({ allergens, selectedAllergens, onChange }: AllergenSe
             <div className="flex-grow">
               <Label
                 htmlFor={`allergen-${allergen.id}`}
-                className="cursor-pointer font-medium"
+                className="cursor-pointer font-medium w-full"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent double triggering via container click
+                  handleAllergenChange(allergen.id);
+                }}
               >
                 {allergen.name}
               </Label>
