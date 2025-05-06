@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Dish, Allergen, allergens } from '../data/dishesData';
+import { Dish, Allergen } from '../types/types';
 import {
   Dialog,
   DialogContent,
@@ -17,13 +17,14 @@ interface DishModalProps {
   isOpen: boolean;
   onClose: () => void;
   selectedAllergens: string[];
+  allergenList: Allergen[];
 }
 
-const DishModal = ({ dish, isOpen, onClose, selectedAllergens }: DishModalProps) => {
+const DishModal = ({ dish, isOpen, onClose, selectedAllergens, allergenList }: DishModalProps) => {
   if (!dish) return null;
 
   // Get allergen objects for this dish
-  const dishAllergens = allergens.filter(allergen => 
+  const dishAllergens = allergenList.filter(allergen => 
     dish.allergens.includes(allergen.id)
   );
   

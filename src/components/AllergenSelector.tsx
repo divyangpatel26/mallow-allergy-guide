@@ -1,15 +1,16 @@
 
 import React from 'react';
-import { allergens } from '../data/dishesData';
+import { Allergen } from '../types/types';
 import { Checkbox } from './ui/checkbox';
 import { Label } from './ui/label';
 
 interface AllergenSelectorProps {
+  allergens: Allergen[];
   selectedAllergens: string[];
   onChange: (selectedAllergens: string[]) => void;
 }
 
-const AllergenSelector = ({ selectedAllergens, onChange }: AllergenSelectorProps) => {
+const AllergenSelector = ({ allergens, selectedAllergens, onChange }: AllergenSelectorProps) => {
   const handleAllergenChange = (allergenId: string) => {
     if (selectedAllergens.includes(allergenId)) {
       onChange(selectedAllergens.filter(id => id !== allergenId));

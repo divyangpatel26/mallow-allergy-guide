@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Dish, Allergen, allergens } from '../data/dishesData';
+import { Dish, Allergen } from '../types/types';
 import { Button } from './ui/button';
 import { Info } from 'lucide-react';
 
@@ -9,9 +9,10 @@ interface DishCardProps {
   selectedAllergens: string[];
   showDetails: (dish: Dish) => void;
   showAllDishes: boolean;
+  allergenList: Allergen[];
 }
 
-const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes }: DishCardProps) => {
+const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allergenList }: DishCardProps) => {
   // Check if dish contains any of the selected allergens
   const containsSelectedAllergens = dish.allergens.some(allergen => 
     selectedAllergens.includes(allergen)
@@ -23,7 +24,7 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes }: DishC
   }
 
   // Get allergen info for this dish
-  const dishAllergenInfo = allergens.filter(allergen => 
+  const dishAllergenInfo = allergenList.filter(allergen => 
     dish.allergens.includes(allergen.id)
   );
 
