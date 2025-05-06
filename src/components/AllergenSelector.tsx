@@ -53,20 +53,17 @@ const AllergenSelector = ({ allergens, selectedAllergens, onChange }: AllergenSe
                 onCheckedChange={() => handleAllergenChange(allergen.id)}
                 className="h-5 w-5 mr-3 border-2 border-gray-400 data-[state=checked]:border-primary-foreground"
               />
-              <div 
-                className="flex-grow cursor-pointer"
+              <Label
+                htmlFor={`allergen-${allergen.id}`}
+                className={`cursor-pointer font-medium w-full ${isSelected ? 'text-primary-foreground font-semibold' : ''}`}
                 onClick={(e) => {
-                  e.stopPropagation(); // Prevent double triggering via container click
+                  // Stop propagation to prevent double triggering
+                  e.stopPropagation();
                   handleAllergenChange(allergen.id);
                 }}
               >
-                <Label
-                  htmlFor={`allergen-${allergen.id}`}
-                  className={`cursor-pointer font-medium w-full ${isSelected ? 'text-primary-foreground font-semibold' : ''}`}
-                >
-                  {allergen.name}
-                </Label>
-              </div>
+                {allergen.name}
+              </Label>
             </div>
           );
         })}
