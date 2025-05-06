@@ -3,6 +3,7 @@ import React from 'react';
 import { Allergen } from '../types/types';
 import { Checkbox } from './ui/checkbox';
 import { Label } from './ui/label';
+import { Badge } from './ui/badge';
 
 interface AllergenSelectorProps {
   allergens: Allergen[];
@@ -23,20 +24,37 @@ const AllergenSelector = ({ allergens, selectedAllergens, onChange }: AllergenSe
     <div className="bg-white rounded-lg shadow-md p-6">
       <h3 className="text-xl font-playfair font-semibold mb-4">Select Your Allergies</h3>
       
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
         {allergens.map((allergen) => (
-          <div key={allergen.id} className="flex items-center space-x-2">
-            <Checkbox
-              id={`allergen-${allergen.id}`}
-              checked={selectedAllergens.includes(allergen.id)}
-              onCheckedChange={() => handleAllergenChange(allergen.id)}
-            />
-            <Label
-              htmlFor={`allergen-${allergen.id}`}
-              className="flex items-center cursor-pointer"
-            >
-              <span className="mr-1">{allergen.icon}</span> {allergen.name}
-            </Label>
+          <div 
+            key={allergen.id}
+            className={`
+              border rounded-lg p-3 transition-all cursor-pointer
+              ${selectedAllergens.includes(allergen.id) 
+                ? 'bg-primary border-primary-foreground shadow-sm' 
+                : 'bg-white border-gray-200 hover:bg-mallow-gray-light'}
+            `}
+            onClick={() => handleAllergenChange(allergen.id)}
+          >
+            <div className="flex items-center justify-between">
+              <Label
+                htmlFor={`allergen-${allergen.id}`}
+                className="flex items-center cursor-pointer flex-grow"
+              >
+                {allergen.name}
+              </Label>
+              <Checkbox
+                id={`allergen-${allergen.id}`}
+                checked={selectedAllergens.includes(allergen.id)}
+                onCheckedChange={() => handleAllergenChange(allergen.id)}
+                className="ml-2"
+              />
+            </div>
+            {selectedAllergens.includes(allergen.id) && (
+              <Badge variant="outline" className="mt-2 bg-secondary text-secondary-foreground text-xs">
+                Selected
+              </Badge>
+            )}
           </div>
         ))}
       </div>
