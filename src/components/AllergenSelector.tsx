@@ -37,6 +37,15 @@ const AllergenSelector = ({ allergens, selectedAllergens, onChange }: AllergenSe
                   : 'bg-white border-gray-200 hover:bg-mallow-gray-light'}
               `}
               onClick={() => handleAllergenChange(allergen.id)}
+              role="button"
+              aria-pressed={isSelected}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleAllergenChange(allergen.id);
+                }
+              }}
             >
               <Checkbox
                 id={`allergen-${allergen.id}`}
@@ -44,14 +53,16 @@ const AllergenSelector = ({ allergens, selectedAllergens, onChange }: AllergenSe
                 onCheckedChange={() => handleAllergenChange(allergen.id)}
                 className="h-5 w-5 mr-3 border-2 border-gray-400 data-[state=checked]:border-primary-foreground"
               />
-              <div className="flex-grow">
+              <div 
+                className="flex-grow cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent double triggering via container click
+                  handleAllergenChange(allergen.id);
+                }}
+              >
                 <Label
                   htmlFor={`allergen-${allergen.id}`}
                   className={`cursor-pointer font-medium w-full ${isSelected ? 'text-primary-foreground font-semibold' : ''}`}
-                  onClick={(e) => {
-                    e.stopPropagation(); // Prevent double triggering via container click
-                    handleAllergenChange(allergen.id);
-                  }}
                 >
                   {allergen.name}
                 </Label>
