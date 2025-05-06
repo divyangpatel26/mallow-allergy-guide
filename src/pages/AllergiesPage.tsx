@@ -16,6 +16,7 @@ const AllergiesPage = () => {
   const [showAllDishes, setShowAllDishes] = useState(true);
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [onionGarlicFree, setOnionGarlicFree] = useState(false);
   
   // State for data from Supabase
   const [allergens, setAllergens] = useState<Allergen[]>([]);
@@ -71,7 +72,7 @@ const AllergiesPage = () => {
     setIsModalOpen(false);
   };
 
-  // Filter dishes based on search, category, and allergens
+  // Filter dishes based on search, category, allergens, and onion/garlic free
   const filteredDishes = useMemo(() => {
     return dishes.filter((dish) => {
       // Filter by search term
@@ -88,9 +89,14 @@ const AllergiesPage = () => {
         selectedCategory === 'all' || 
         dish.category === selectedCategory;
       
-      return matchesSearch && matchesCategory;
+      // Filter by onion & garlic free
+      const matchesOnionGarlicFree = 
+        !onionGarlicFree || 
+        dish.onion_garlic_free === true;
+      
+      return matchesSearch && matchesCategory && matchesOnionGarlicFree;
     });
-  }, [searchTerm, selectedCategory, dishes]);
+  }, [searchTerm, selectedCategory, dishes, onionGarlicFree]);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -137,20 +143,29 @@ const AllergiesPage = () => {
               onCategoryChange={setSelectedCategory}
               showAllDishes={showAllDishes}
               onShowAllChange={setShowAllDishes}
+              onionGarlicFree={onionGarlicFree}
+              onOnionGarlicFreeChange={setOnionGarlicFree}
             />
 
             {/* Results Status */}
-            <div className="bg-white rounded-lg shadow-md p-6 flex justify-between items-center">
+            <div className="bg-white rounded-lg shadow-md p-6 flex flex-wrap justify-between items-center gap-4">
               <h2 className="text-xl font-playfair font-semibold">
                 {filteredDishes.length} {filteredDishes.length === 1 ? 'Dish' : 'Dishes'} Available
               </h2>
-              {selectedAllergens.length > 0 && (
-                <div className="text-sm text-gray-600">
-                  {showAllDishes ? 'Showing all dishes' : 'Showing only safe dishes'}
-                  {' • '}
-                  {selectedAllergens.length} {selectedAllergens.length === 1 ? 'allergen' : 'allergens'} selected
-                </div>
-              )}
+              <div className="text-sm text-gray-600 flex flex-wrap gap-2">
+                {selectedAllergens.length > 0 && (
+                  <span>
+                    {showAllDishes ? 'Showing all dishes' : 'Showing only safe dishes'}
+                    {' • '}
+                    {selectedAllergens.length} {selectedAllergens.length === 1 ? 'allergen' : 'allergens'} selected
+                  </span>
+                )}
+                {onionGarlicFree && (
+                  <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">
+                    Onion & Garlic Free
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* Dishes Grid */}

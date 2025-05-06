@@ -12,7 +12,8 @@ const sampleDishes = [
     image: 'https://images.unsplash.com/photo-1476124369491-e7addf5db371',
     category: 'mains' as DishCategory,
     allergens: ['Gluten', 'Dairy'],
-    ingredients: ['Arborio rice', 'Wild mushrooms', 'White wine', 'Vegetable stock', 'Parmesan', 'Truffle oil', 'Herbs']
+    ingredients: ['Arborio rice', 'Wild mushrooms', 'White wine', 'Vegetable stock', 'Parmesan', 'Truffle oil', 'Herbs'],
+    onion_garlic_free: false
   },
   {
     name: 'Avocado Toast',
@@ -20,7 +21,8 @@ const sampleDishes = [
     image: 'https://images.unsplash.com/photo-1603046891744-76bbd9f4dfe7',
     category: 'starters' as DishCategory,
     allergens: ['Gluten'],
-    ingredients: ['Sourdough bread', 'Avocado', 'Lemon juice', 'Chili flakes', 'Sea salt', 'Microgreens']
+    ingredients: ['Sourdough bread', 'Avocado', 'Lemon juice', 'Chili flakes', 'Sea salt', 'Microgreens'],
+    onion_garlic_free: true
   },
   {
     name: 'Quinoa Buddha Bowl',
@@ -28,7 +30,8 @@ const sampleDishes = [
     image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd',
     category: 'mains' as DishCategory,
     allergens: ['Sesame', 'Nuts'],
-    ingredients: ['Quinoa', 'Roasted sweet potato', 'Broccoli', 'Chickpeas', 'Avocado', 'Tahini', 'Mixed seeds', 'Almonds']
+    ingredients: ['Quinoa', 'Roasted sweet potato', 'Broccoli', 'Chickpeas', 'Avocado', 'Tahini', 'Mixed seeds', 'Almonds'],
+    onion_garlic_free: true
   },
   {
     name: 'Chocolate Mousse',
@@ -36,7 +39,44 @@ const sampleDishes = [
     image: 'https://images.unsplash.com/photo-1511715112108-9acc5d89e861',
     category: 'desserts' as DishCategory,
     allergens: ['Dairy', 'Soy'],
-    ingredients: ['Dark chocolate', 'Heavy cream', 'Egg whites', 'Sugar', 'Vanilla extract', 'Raspberries']
+    ingredients: ['Dark chocolate', 'Heavy cream', 'Egg whites', 'Sugar', 'Vanilla extract', 'Raspberries'],
+    onion_garlic_free: true
+  },
+  {
+    name: 'Breakfast Pancakes',
+    description: 'Fluffy pancakes with fresh berries and maple syrup',
+    image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445',
+    category: 'breakfast' as DishCategory,
+    allergens: ['Gluten', 'Eggs'],
+    ingredients: ['Flour', 'Eggs', 'Milk', 'Baking powder', 'Sugar', 'Berries', 'Maple syrup'],
+    onion_garlic_free: true
+  },
+  {
+    name: 'Eggs Benedict',
+    description: 'Classic brunch dish with poached eggs and hollandaise sauce',
+    image: 'https://images.unsplash.com/photo-1608039829572-78524f79c4c7',
+    category: 'weekend_brunch' as DishCategory,
+    allergens: ['Gluten', 'Eggs', 'Dairy'],
+    ingredients: ['English muffin', 'Eggs', 'Spinach', 'Hollandaise sauce', 'Butter', 'Vinegar'],
+    onion_garlic_free: true
+  },
+  {
+    name: 'Market Salad',
+    description: 'Fresh seasonal salad with local vegetables and citrus dressing',
+    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd',
+    category: 'market_menu_lunch' as DishCategory,
+    allergens: ['Nuts', 'Mustard'],
+    ingredients: ['Mixed greens', 'Seasonal vegetables', 'Nuts', 'Citrus dressing'],
+    onion_garlic_free: false
+  },
+  {
+    name: 'Grilled Fish',
+    description: 'Locally sourced fish grilled to perfection with seasonal sides',
+    image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2',
+    category: 'market_menu_dinner' as DishCategory,
+    allergens: ['Fish'],
+    ingredients: ['Fresh fish', 'Lemon', 'Herbs', 'Olive oil', 'Seasonal vegetables'],
+    onion_garlic_free: true
   }
 ];
 
@@ -62,7 +102,8 @@ export async function seedSampleDishes() {
           name: dishData.name,
           description: dishData.description,
           image: dishData.image,
-          category: dishData.category,
+          category: dishData.category as DishCategory,
+          onion_garlic_free: dishData.onion_garlic_free
         })
         .select()
         .single();

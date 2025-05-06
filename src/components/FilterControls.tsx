@@ -2,7 +2,8 @@
 import React from 'react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { Search, Filter } from 'lucide-react';
+import { Search, Filter, Ban } from 'lucide-react';
+import { Switch } from './ui/switch';
 
 interface FilterControlsProps {
   searchTerm: string;
@@ -11,6 +12,8 @@ interface FilterControlsProps {
   onCategoryChange: (category: string) => void;
   showAllDishes: boolean;
   onShowAllChange: (showAll: boolean) => void;
+  onionGarlicFree?: boolean;
+  onOnionGarlicFreeChange?: (value: boolean) => void;
 }
 
 const FilterControls = ({
@@ -20,6 +23,8 @@ const FilterControls = ({
   onCategoryChange,
   showAllDishes,
   onShowAllChange,
+  onionGarlicFree = false,
+  onOnionGarlicFreeChange,
 }: FilterControlsProps) => {
   const categories = [
     { id: 'all', label: 'All' },
@@ -27,6 +32,10 @@ const FilterControls = ({
     { id: 'mains', label: 'Mains' },
     { id: 'desserts', label: 'Desserts' },
     { id: 'drinks', label: 'Drinks' },
+    { id: 'breakfast', label: 'Breakfast' },
+    { id: 'weekend_brunch', label: 'Weekend Brunch' },
+    { id: 'market_menu_lunch', label: 'Market Menu (Lunch)' },
+    { id: 'market_menu_dinner', label: 'Market Menu (Dinner)' },
   ];
 
   return (
@@ -67,22 +76,36 @@ const FilterControls = ({
         <div className="flex items-center space-x-2 overflow-x-auto pb-2">
           <Filter size={16} className="text-gray-500" />
           <span className="text-gray-500 font-medium">Filter:</span>
-          {categories.map((category) => (
-            <Button
-              key={category.id}
-              variant="outline"
-              size="sm"
-              onClick={() => onCategoryChange(category.id)}
-              className={
-                selectedCategory === category.id
-                  ? "bg-mallow-green-light text-gray-800 border-mallow-green"
-                  : "border-gray-200"
-              }
-            >
-              {category.label}
-            </Button>
-          ))}
+          <div className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <Button
+                key={category.id}
+                variant="outline"
+                size="sm"
+                onClick={() => onCategoryChange(category.id)}
+                className={
+                  selectedCategory === category.id
+                    ? "bg-mallow-green-light text-gray-800 border-mallow-green"
+                    : "border-gray-200"
+                }
+              >
+                {category.label}
+              </Button>
+            ))}
+          </div>
         </div>
+        
+        {/* Onion & Garlic Free Filter */}
+        {onOnionGarlicFreeChange && (
+          <div className="flex items-center space-x-3 pt-2 border-t border-gray-100">
+            <Ban size={16} className="text-gray-500" />
+            <span className="text-gray-700">Onion & Garlic Free</span>
+            <Switch 
+              checked={onionGarlicFree} 
+              onCheckedChange={onOnionGarlicFreeChange}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

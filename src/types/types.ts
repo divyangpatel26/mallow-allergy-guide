@@ -13,4 +13,5 @@ export interface Dish {
   category: string;
   allergens: string[];
   ingredients: string[];
+  onion_garlic_free?: boolean;
 }

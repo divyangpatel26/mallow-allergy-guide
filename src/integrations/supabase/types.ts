@@ -110,6 +110,7 @@ export type Database = {
           id: string
           image: string
           name: string
+          onion_garlic_free: boolean | null
           updated_at: string
         }
         Insert: {
@@ -119,6 +120,7 @@ export type Database = {
           id?: string
           image: string
           name: string
+          onion_garlic_free?: boolean | null
           updated_at?: string
         }
         Update: {
@@ -128,6 +130,7 @@ export type Database = {
           id?: string
           image?: string
           name?: string
+          onion_garlic_free?: boolean | null
           updated_at?: string
         }
         Relationships: []
@@ -158,7 +161,15 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      dish_category: "starters" | "mains" | "desserts" | "drinks"
+      dish_category:
+        | "starters"
+        | "mains"
+        | "desserts"
+        | "drinks"
+        | "breakfast"
+        | "weekend_brunch"
+        | "market_menu_lunch"
+        | "market_menu_dinner"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -274,7 +285,16 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      dish_category: ["starters", "mains", "desserts", "drinks"],
+      dish_category: [
+        "starters",
+        "mains",
+        "desserts",
+        "drinks",
+        "breakfast",
+        "weekend_brunch",
+        "market_menu_lunch",
+        "market_menu_dinner",
+      ],
     },
   },
 } as const

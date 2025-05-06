@@ -40,6 +40,10 @@ const Menu = () => {
     { id: 'mains', name: 'Mains' },
     { id: 'desserts', name: 'Desserts' },
     { id: 'drinks', name: 'Drinks' },
+    { id: 'breakfast', name: 'Breakfast' },
+    { id: 'weekend_brunch', name: 'Weekend Brunch' },
+    { id: 'market_menu_lunch', name: 'Market Menu (Lunch)' },
+    { id: 'market_menu_dinner', name: 'Market Menu (Dinner)' },
   ];
 
   const showDishDetails = (dish: Dish) => {
@@ -97,9 +101,16 @@ const Menu = () => {
                         </div>
                         <div className="p-5 flex-1 flex flex-col justify-between">
                           <div>
-                            <h3 className="font-playfair text-lg font-semibold text-gray-800 mb-2">
-                              {dish.name}
-                            </h3>
+                            <div className="flex justify-between items-start">
+                              <h3 className="font-playfair text-lg font-semibold text-gray-800 mb-2">
+                                {dish.name}
+                              </h3>
+                              {dish.onion_garlic_free && (
+                                <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                                  Onion & Garlic Free
+                                </span>
+                              )}
+                            </div>
                             <p className="text-gray-600 text-sm">{dish.description}</p>
                           </div>
                           <Button 

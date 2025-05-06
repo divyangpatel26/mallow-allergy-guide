@@ -70,7 +70,8 @@ export async function getDishes(): Promise<Dish[]> {
       image: dish.image,
       category: dish.category,
       allergens: allergens,
-      ingredients: ingredients
+      ingredients: ingredients,
+      onion_garlic_free: dish.onion_garlic_free || false
     };
   }));
   

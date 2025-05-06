@@ -29,7 +29,7 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
   );
 
   return (
-    <div className="dish-card group animate-scale-in">
+    <div className="dish-card group animate-scale-in bg-white rounded-lg shadow-md overflow-hidden">
       <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-gray-100">
         <img 
           src={dish.image} 
@@ -44,13 +44,24 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
           
           {/* Safe/Unsafe indicator */}
           {selectedAllergens.length > 0 && (
-            <span className={`allergen-badge ${containsSelectedAllergens ? 'allergen-unsafe' : 'allergen-safe'}`}>
+            <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
+              containsSelectedAllergens ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+            }`}>
               {containsSelectedAllergens ? 'Contains Allergens' : 'Safe'}
             </span>
           )}
         </div>
         
         <p className="mt-2 text-gray-600 line-clamp-2">{dish.description}</p>
+        
+        {/* Dietary info */}
+        <div className="mt-2 flex flex-wrap gap-1">
+          {dish.onion_garlic_free && (
+            <span className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium bg-green-100 text-green-800">
+              Onion & Garlic Free
+            </span>
+          )}
+        </div>
         
         {/* Allergen Icons */}
         {dishAllergenInfo.length > 0 && (
@@ -60,7 +71,7 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
                 key={allergen.id} 
                 className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
                   selectedAllergens.includes(allergen.id) 
-                    ? 'bg-mallow-red text-red-800' 
+                    ? 'bg-red-100 text-red-800' 
                     : 'bg-gray-100 text-gray-600'
                 }`}
                 title={allergen.name}
