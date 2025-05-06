@@ -50,17 +50,14 @@ const AllergenSelector = ({ allergens, selectedAllergens, onChange }: AllergenSe
               <Checkbox
                 id={`allergen-${allergen.id}`}
                 checked={isSelected}
-                onCheckedChange={() => handleAllergenChange(allergen.id)}
+                onCheckedChange={() => {
+                  handleAllergenChange(allergen.id);
+                }}
                 className="h-5 w-5 mr-3 border-2 border-gray-400 data-[state=checked]:border-primary-foreground"
               />
               <Label
                 htmlFor={`allergen-${allergen.id}`}
                 className={`cursor-pointer font-medium w-full ${isSelected ? 'text-primary-foreground font-semibold' : ''}`}
-                onClick={(e) => {
-                  // Stop propagation to prevent double triggering
-                  e.stopPropagation();
-                  handleAllergenChange(allergen.id);
-                }}
               >
                 {allergen.name}
               </Label>
