@@ -27,7 +27,8 @@ const Menu = () => {
         ]);
         setDishes(dishesData);
         setAllergens(allergensData);
-        setCategories(categoriesData.filter(category => category.id !== 'all'));
+        // We want all categories EXCEPT the one with id 'all'
+        setCategories(categoriesData);
       } catch (error) {
         console.error('Error loading data:', error);
       } finally {

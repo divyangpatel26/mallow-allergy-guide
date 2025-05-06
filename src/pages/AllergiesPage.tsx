@@ -87,7 +87,8 @@ const AllergiesPage = () => {
           ingredient.toLowerCase().includes(searchTerm.toLowerCase())
         );
       
-      // Filter by category - now checks if the dish belongs to any of the selected categories
+      // Filter by category - now checking if the dish belongs to the selected category
+      // If 'all' is selected, show all dishes regardless of category
       const matchesCategory = 
         selectedCategory === 'all' || 
         dish.categories.includes(selectedCategory);
