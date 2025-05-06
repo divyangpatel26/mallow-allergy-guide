@@ -62,7 +62,7 @@ const DishModal = ({ dish, isOpen, onClose, selectedAllergens, allergenList }: D
             </ul>
           </div>
           
-          {/* Allergens */}
+          {/* Allergens - Removed icons */}
           <div>
             <h4 className="font-playfair text-lg font-semibold mb-2">Allergen Information</h4>
             
@@ -77,7 +77,7 @@ const DishModal = ({ dish, isOpen, onClose, selectedAllergens, allergenList }: D
                         : 'bg-gray-100 text-gray-600'
                     }`}
                   >
-                    {allergen.icon} {allergen.name}
+                    {allergen.name}
                   </span>
                 ))}
               </div>
