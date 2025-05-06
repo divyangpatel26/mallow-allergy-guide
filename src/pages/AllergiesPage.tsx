@@ -87,7 +87,7 @@ const AllergiesPage = () => {
           ingredient.toLowerCase().includes(searchTerm.toLowerCase())
         );
       
-      // Filter by category - now checking if the dish belongs to the selected category
+      // Filter by category - checking if the dish belongs to the selected category
       // If 'all' is selected, show all dishes regardless of category
       const matchesCategory = 
         selectedCategory === 'all' || 
@@ -98,9 +98,20 @@ const AllergiesPage = () => {
         !onionGarlicFree || 
         dish.onion_garlic_free === true;
       
-      return matchesSearch && matchesCategory && matchesOnionGarlicFree;
+      // Only apply the allergen filter if we're showing safe dishes only
+      let isAllergySafe = true;
+      if (!showAllDishes && selectedAllergens.length > 0) {
+        isAllergySafe = !dish.allergens.some(allergen => 
+          selectedAllergens.includes(allergen)
+        );
+      }
+      
+      return matchesSearch && matchesCategory && matchesOnionGarlicFree && isAllergySafe;
     });
-  }, [searchTerm, selectedCategory, dishes, onionGarlicFree]);
+  }, [searchTerm, selectedCategory, dishes, onionGarlicFree, selectedAllergens, showAllDishes]);
+
+  // Count how many dishes are actually displayed (after filtering by allergens and showAllDishes)
+  const visibleDishesCount = filteredDishes.length;
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -155,7 +166,7 @@ const AllergiesPage = () => {
             {/* Results Status */}
             <div className="bg-white rounded-lg shadow-md p-6 flex flex-wrap justify-between items-center gap-4">
               <h2 className="text-xl font-playfair font-semibold">
-                {filteredDishes.length} {filteredDishes.length === 1 ? 'Dish' : 'Dishes'} Available
+                {visibleDishesCount} {visibleDishesCount === 1 ? 'Dish' : 'Dishes'} Available
               </h2>
               <div className="text-sm text-gray-600 flex flex-wrap gap-2">
                 {selectedAllergens.length > 0 && (
