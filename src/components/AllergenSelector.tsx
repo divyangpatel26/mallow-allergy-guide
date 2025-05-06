@@ -29,32 +29,33 @@ const AllergenSelector = ({ allergens, selectedAllergens, onChange }: AllergenSe
           <div 
             key={allergen.id}
             className={`
-              border rounded-lg p-3 transition-all cursor-pointer
+              border rounded-lg p-3 transition-all cursor-pointer flex items-center
               ${selectedAllergens.includes(allergen.id) 
                 ? 'bg-primary border-primary-foreground shadow-sm' 
                 : 'bg-white border-gray-200 hover:bg-mallow-gray-light'}
             `}
             onClick={() => handleAllergenChange(allergen.id)}
           >
-            <div className="flex items-center justify-between">
+            <Checkbox
+              id={`allergen-${allergen.id}`}
+              checked={selectedAllergens.includes(allergen.id)}
+              onCheckedChange={() => handleAllergenChange(allergen.id)}
+              className="h-5 w-5 mr-3 border-2 border-gray-400 data-[state=checked]:border-primary-foreground"
+            />
+            <div className="flex-grow">
               <Label
                 htmlFor={`allergen-${allergen.id}`}
-                className="flex items-center cursor-pointer flex-grow"
+                className="cursor-pointer font-medium"
               >
                 {allergen.name}
               </Label>
-              <Checkbox
-                id={`allergen-${allergen.id}`}
-                checked={selectedAllergens.includes(allergen.id)}
-                onCheckedChange={() => handleAllergenChange(allergen.id)}
-                className="ml-2"
-              />
+              
+              {selectedAllergens.includes(allergen.id) && (
+                <Badge variant="outline" className="mt-1 block bg-secondary text-secondary-foreground text-xs">
+                  Selected
+                </Badge>
+              )}
             </div>
-            {selectedAllergens.includes(allergen.id) && (
-              <Badge variant="outline" className="mt-2 bg-secondary text-secondary-foreground text-xs">
-                Selected
-              </Badge>
-            )}
           </div>
         ))}
       </div>
