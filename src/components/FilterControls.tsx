@@ -68,7 +68,7 @@ const FilterControls = ({
           <Filter size={16} className="text-gray-500" />
           <span className="text-gray-500 font-medium">Filter:</span>
           <div className="flex flex-wrap gap-2">
-            {/* Add "All" category button */}
+            {/* "All" category button */}
             <Button
               key="all"
               variant="outline"
