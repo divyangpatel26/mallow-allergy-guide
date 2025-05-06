@@ -3,7 +3,6 @@ import React from 'react';
 import { Allergen } from '../types/types';
 import { Checkbox } from './ui/checkbox';
 import { Label } from './ui/label';
-import { Badge } from './ui/badge';
 
 interface AllergenSelectorProps {
   allergens: Allergen[];
@@ -25,43 +24,41 @@ const AllergenSelector = ({ allergens, selectedAllergens, onChange }: AllergenSe
       <h3 className="text-xl font-playfair font-semibold mb-4">Select Your Allergies</h3>
       
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-        {allergens.map((allergen) => (
-          <div 
-            key={allergen.id}
-            className={`
-              border rounded-lg p-3 transition-all cursor-pointer flex items-center
-              ${selectedAllergens.includes(allergen.id) 
-                ? 'bg-primary border-primary-foreground shadow-sm' 
-                : 'bg-white border-gray-200 hover:bg-mallow-gray-light'}
-            `}
-            onClick={() => handleAllergenChange(allergen.id)}
-          >
-            <Checkbox
-              id={`allergen-${allergen.id}`}
-              checked={selectedAllergens.includes(allergen.id)}
-              onCheckedChange={() => handleAllergenChange(allergen.id)}
-              className="h-5 w-5 mr-3 border-2 border-gray-400 data-[state=checked]:border-primary-foreground"
-            />
-            <div className="flex-grow">
-              <Label
-                htmlFor={`allergen-${allergen.id}`}
-                className="cursor-pointer font-medium w-full"
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent double triggering via container click
-                  handleAllergenChange(allergen.id);
-                }}
-              >
-                {allergen.name}
-              </Label>
-              
-              {selectedAllergens.includes(allergen.id) && (
-                <Badge variant="outline" className="mt-1 block bg-secondary text-secondary-foreground text-xs">
-                  Selected
-                </Badge>
-              )}
+        {allergens.map((allergen) => {
+          const isSelected = selectedAllergens.includes(allergen.id);
+          
+          return (
+            <div 
+              key={allergen.id}
+              className={`
+                border rounded-lg p-3 transition-all cursor-pointer flex items-center
+                ${isSelected 
+                  ? 'bg-primary/70 border-primary-foreground shadow-sm' 
+                  : 'bg-white border-gray-200 hover:bg-mallow-gray-light'}
+              `}
+              onClick={() => handleAllergenChange(allergen.id)}
+            >
+              <Checkbox
+                id={`allergen-${allergen.id}`}
+                checked={isSelected}
+                onCheckedChange={() => handleAllergenChange(allergen.id)}
+                className="h-5 w-5 mr-3 border-2 border-gray-400 data-[state=checked]:border-primary-foreground"
+              />
+              <div className="flex-grow">
+                <Label
+                  htmlFor={`allergen-${allergen.id}`}
+                  className={`cursor-pointer font-medium w-full ${isSelected ? 'text-primary-foreground font-semibold' : ''}`}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent double triggering via container click
+                    handleAllergenChange(allergen.id);
+                  }}
+                >
+                  {allergen.name}
+                </Label>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
