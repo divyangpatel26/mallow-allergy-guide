@@ -14,9 +14,13 @@ const Header = () => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center">
-          <h1 className="text-2xl font-playfair font-bold">Mallow London</h1>
-        </Link>
+        <a href="https://mallowlondon.com/" target="_blank" rel="noopener noreferrer" className="flex items-center">
+          <img 
+            src="/lovable-uploads/0f33cca1-00d6-4cef-8413-8cebd45ed2e0.png" 
+            alt="Mallow London" 
+            className="h-10"
+          />
+        </a>
 
         {/* Mobile Menu Button */}
         <button 
