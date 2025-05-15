@@ -8,7 +8,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AllergiesPage from "./pages/AllergiesPage";
 import NotFound from "./pages/NotFound";
-import BackgroundImages from "./components/BackgroundImages";
 
 const queryClient = new QueryClient();
 
@@ -18,7 +17,6 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <BackgroundImages />
         <div className="flex flex-col min-h-screen">
           <Header />
           <main className="flex-grow">
