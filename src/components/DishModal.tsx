@@ -54,15 +54,17 @@ const DishModal = ({ dish, isOpen, onClose, selectedAllergens, allergenList }: D
             />
           </div>
           
-          {/* Ingredients */}
-          <div className="mb-6">
-            <h4 className="font-playfair text-lg font-semibold mb-2">Ingredients</h4>
-            <ul className="list-disc list-inside space-y-1">
-              {dish.ingredients.map((ingredient, index) => (
-                <li key={index} className="text-gray-700">{ingredient}</li>
-              ))}
-            </ul>
-          </div>
+          {/* Ingredients - Only show if ingredients array exists and has items */}
+          {dish.ingredients && dish.ingredients.length > 0 && (
+            <div className="mb-6">
+              <h4 className="font-playfair text-lg font-semibold mb-2">Ingredients</h4>
+              <ul className="list-disc list-inside space-y-1">
+                {dish.ingredients.map((ingredient, index) => (
+                  <li key={index} className="text-gray-700">{ingredient}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           
           {/* Allergens - without icons */}
           <div>
