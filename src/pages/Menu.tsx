@@ -71,9 +71,16 @@ const Menu = () => {
           <div className="space-y-16 max-w-6xl mx-auto">
             {categories.map((category) => {
               // For each category, filter dishes that belong to this category
-              const categoryDishes = dishes.filter(dish => 
+              let categoryDishes = dishes.filter(dish => 
                 dish.categories.includes(category.id)
               );
+              
+              // Sort dishes by created_at date (most recent first)
+              categoryDishes = categoryDishes.sort((a, b) => {
+                const dateA = new Date(a.created_at || 0).getTime();
+                const dateB = new Date(b.created_at || 0).getTime();
+                return dateB - dateA; // Sort descending (newest first)
+              });
               
               if (categoryDishes.length === 0) return null;
               
