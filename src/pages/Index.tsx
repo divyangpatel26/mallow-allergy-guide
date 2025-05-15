@@ -1,8 +1,8 @@
 
-import Home from './Home';
+import AllergiesPage from './AllergiesPage';
 
 const Index = () => {
-  return <Home />;
+  return <AllergiesPage />;
 };
 
 export default Index;

@@ -34,7 +34,7 @@ const Header = () => {
           <div className="container mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-4">
               <Button asChild className="bg-mallow-green-light text-gray-800 hover:bg-mallow-green border border-mallow-green">
-                <Link to="/allergies">Check Your Allergies</Link>
+                <Link to="/" onClick={toggleMenu}>Check Your Allergies</Link>
               </Button>
             </nav>
           </div>
