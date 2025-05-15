@@ -115,14 +115,15 @@ const AllergiesPage = () => {
 
   return (
     <div className="min-h-screen flex relative bg-[#FAF3EB]">
-      {/* Background image container - fixed on left side */}
-      <div className="fixed left-0 top-0 h-full w-1/4 bg-cover bg-no-repeat" style={{ 
+      {/* Background image container - fixed but smaller */}
+      <div className="fixed left-0 top-0 h-full w-1/6 bg-cover bg-no-repeat" style={{ 
         backgroundImage: 'url(/lovable-uploads/a4715997-2cba-4eaa-825a-ee6b08151344.png)',
-        backgroundPosition: 'left center'
+        backgroundPosition: 'left center',
+        zIndex: 0
       }} />
       
-      {/* Main content */}
-      <div className="w-full py-12">
+      {/* Main content - shifted right and layered above background */}
+      <div className="w-full py-12 relative z-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-playfair font-bold mb-4">Allergy Checker</h1>
