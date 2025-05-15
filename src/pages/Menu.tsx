@@ -75,11 +75,11 @@ const Menu = () => {
                 dish.categories.includes(category.id)
               );
               
-              // Sort dishes by display_order (lowest first)
+              // Sort dishes by created_at date (most recent first)
               categoryDishes = categoryDishes.sort((a, b) => {
-                const orderA = a.display_order || 0;
-                const orderB = b.display_order || 0;
-                return orderA - orderB; // Sort ascending (lowest display_order first)
+                const dateA = new Date(a.created_at || 0).getTime();
+                const dateB = new Date(b.created_at || 0).getTime();
+                return dateB - dateA; // Sort descending (newest first)
               });
               
               if (categoryDishes.length === 0) return null;
