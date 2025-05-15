@@ -7,7 +7,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 33 59% 95%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -75,7 +75,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-[#FAF3EB] text-foreground font-sans;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -98,3 +98,4 @@
 .dish-card {
   @apply bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg;
 }
+
