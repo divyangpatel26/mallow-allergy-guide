@@ -10,9 +10,17 @@ interface DishCardProps {
   showDetails: (dish: Dish) => void;
   showAllDishes: boolean;
   allergenList: Allergen[];
+  onionGarlicFree?: boolean;
 }
 
-const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allergenList }: DishCardProps) => {
+const DishCard = ({ 
+  dish, 
+  selectedAllergens, 
+  showDetails, 
+  showAllDishes, 
+  allergenList,
+  onionGarlicFree = false
+}: DishCardProps) => {
   // Check if dish contains any of the selected allergens
   const containsSelectedAllergens = dish.allergens.some(allergen => 
     selectedAllergens.includes(allergen)
@@ -58,14 +66,14 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
           dangerouslySetInnerHTML={{ __html: dish.description }}
         />
         
-        {/* Dietary info */}
-        <div className="mt-2 flex flex-wrap gap-1">
-          {dish.onion_garlic_free && (
+        {/* Dietary info - Only show when onionGarlicFree filter is active */}
+        {dish.onion_garlic_free && onionGarlicFree && (
+          <div className="mt-2 flex flex-wrap gap-1">
             <span className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium bg-green-100 text-green-800">
               Onion & Garlic Free
             </span>
-          )}
-        </div>
+          </div>
+        )}
         
         {/* Allergen Tags - removed icons */}
         {dishAllergenInfo.length > 0 && (

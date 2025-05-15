@@ -194,6 +194,7 @@ const AllergiesPage = () => {
                   showDetails={showDishDetails}
                   showAllDishes={showAllDishes}
                   allergenList={allergens}
+                  onionGarlicFree={onionGarlicFree}
                 />
               ))}
             </div>
