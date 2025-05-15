@@ -14,15 +14,7 @@ const Header = () => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <a href="https://mallowlondon.com/" target="_blank" rel="noopener noreferrer" className="flex items-center">
-          <img 
-            src="/lovable-uploads/0f33cca1-00d6-4cef-8413-8cebd45ed2e0.png" 
-            alt="Mallow London" 
-            className="h-10"
-          />
-        </a>
-
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button on left */}
         <button 
           className="md:hidden text-gray-700 p-2" 
           onClick={toggleMenu}
@@ -30,6 +22,20 @@ const Header = () => {
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
+        
+        {/* Logo centered */}
+        <div className="flex-grow flex justify-center">
+          <a href="https://mallowlondon.com/" target="_blank" rel="noopener noreferrer" className="flex items-center">
+            <img 
+              src="/lovable-uploads/0f33cca1-00d6-4cef-8413-8cebd45ed2e0.png" 
+              alt="Mallow London" 
+              className="h-10"
+            />
+          </a>
+        </div>
+        
+        {/* Empty div to balance layout */}
+        <div className="md:hidden w-10"></div>
       </div>
 
       {/* Mobile Navigation */}
