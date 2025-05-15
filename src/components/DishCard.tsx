@@ -52,7 +52,11 @@ const DishCard = ({ dish, selectedAllergens, showDetails, showAllDishes, allerge
           )}
         </div>
         
-        <p className="mt-2 text-gray-600 line-clamp-2">{dish.description}</p>
+        {/* Rich HTML description */}
+        <div 
+          className="mt-2 text-gray-600 prose-sm prose-gray antialiased leading-relaxed line-clamp-2 overflow-hidden"
+          dangerouslySetInnerHTML={{ __html: dish.description }}
+        />
         
         {/* Dietary info */}
         <div className="mt-2 flex flex-wrap gap-1">

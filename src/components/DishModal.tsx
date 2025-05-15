@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Dish, Allergen } from '../types/types';
 import {
@@ -37,9 +38,11 @@ const DishModal = ({ dish, isOpen, onClose, selectedAllergens, allergenList }: D
       <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="font-playfair text-2xl">{dish.name}</DialogTitle>
-          <DialogDescription className="text-base text-gray-700 mt-2">
-            {dish.description}
-          </DialogDescription>
+          {/* Replace regular text description with rich HTML rendering */}
+          <div 
+            className="prose prose-sm prose-gray text-base text-gray-700 mt-3 antialiased leading-relaxed space-y-4"
+            dangerouslySetInnerHTML={{ __html: dish.description }}
+          />
         </DialogHeader>
         
         <div className="mt-4">

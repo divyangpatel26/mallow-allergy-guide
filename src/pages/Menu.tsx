@@ -107,7 +107,11 @@ const Menu = () => {
                                 </span>
                               )}
                             </div>
-                            <p className="text-gray-600 text-sm">{dish.description}</p>
+                            {/* Replace regular text description with rich HTML rendering */}
+                            <div 
+                              className="text-gray-600 text-sm prose-sm prose-gray antialiased max-w-none"
+                              dangerouslySetInnerHTML={{ __html: dish.description }}
+                            />
                           </div>
                           <Button 
                             onClick={() => showDishDetails(dish)} 
