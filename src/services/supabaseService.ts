@@ -1,3 +1,4 @@
+
 import { supabase } from "@/integrations/supabase/client";
 import { Allergen, Dish, Category } from "../types/types";
 
@@ -83,7 +84,9 @@ export async function getDishes(): Promise<Dish[]> {
       categories: categories,
       allergens: allergens,
       ingredients: ingredients,
-      onion_garlic_free: dish.onion_garlic_free || false
+      onion_garlic_free: dish.onion_garlic_free || false,
+      created_at: dish.created_at,
+      display_order: dish.display_order || 0 // Include display_order in the returned dish object
     };
   }));
   

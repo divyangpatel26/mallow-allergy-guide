@@ -14,6 +14,7 @@ export interface Dish {
   ingredients: string[];
   onion_garlic_free?: boolean;
   created_at?: string;  // Added created_at field
+  display_order?: number; // Added display_order field for manual sorting
 }
 
 export interface Category {
