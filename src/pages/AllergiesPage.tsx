@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo, useEffect } from 'react';
 import AllergenSelector from '../components/AllergenSelector';
 import FilterControls from '../components/FilterControls';
@@ -119,11 +118,11 @@ const AllergiesPage = () => {
       <div className="fixed left-0 top-0 h-full w-1/6 bg-cover bg-no-repeat" style={{ 
         backgroundImage: 'url(/lovable-uploads/a4715997-2cba-4eaa-825a-ee6b08151344.png)',
         backgroundPosition: 'left center',
-        zIndex: 0
+        zIndex: -1 // Changed from 0 to -1 to ensure it stays behind all content including footer
       }} />
       
-      {/* Main content - shifted right and layered above background */}
-      <div className="w-full py-12 relative z-10">
+      {/* Main content - layered above background */}
+      <div className="w-full py-12 relative z-1">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-playfair font-bold mb-4">Allergy Checker</h1>

@@ -1,10 +1,9 @@
-
 import React from 'react';
 import { Instagram, Facebook, Twitter } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#FAF3EB] pt-12 pb-8">
+    <footer className="bg-[#FAF3EB] pt-12 pb-8 relative z-10">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Contact Information */}
