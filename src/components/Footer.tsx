@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Instagram, Facebook, Twitter } from 'lucide-react';
+import { Instagram } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -28,14 +29,14 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-playfair font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-700 hover:text-gray-900" aria-label="Instagram">
+              <a 
+                href="https://www.instagram.com/mallowlondon/" 
+                className="text-gray-700 hover:text-gray-900" 
+                aria-label="Instagram"
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
                 <Instagram size={24} />
-              </a>
-              <a href="#" className="text-gray-700 hover:text-gray-900" aria-label="Facebook">
-                <Facebook size={24} />
-              </a>
-              <a href="#" className="text-gray-700 hover:text-gray-900" aria-label="Twitter">
-                <Twitter size={24} />
               </a>
             </div>
           </div>
