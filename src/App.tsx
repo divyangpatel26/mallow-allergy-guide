@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AllergiesPage from "./pages/AllergiesPage";
 import NotFound from "./pages/NotFound";
+import ScrollButtons from "./components/ScrollButtons";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
             </Routes>
           </main>
           <Footer />
+          <ScrollButtons />
         </div>
       </BrowserRouter>
     </TooltipProvider>
