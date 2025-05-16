@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import AutoScroll from "./components/AutoScroll";
 import AllergiesPage from "./pages/AllergiesPage";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
             </Routes>
           </main>
           <Footer />
+          <AutoScroll />
         </div>
       </BrowserRouter>
     </TooltipProvider>
