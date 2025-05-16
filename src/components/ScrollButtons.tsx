@@ -44,7 +44,7 @@ const ScrollButtons = () => {
       <Button 
         onClick={scrollToTop}
         size="icon"
-        className="bg-mallow-green hover:bg-mallow-green/90 text-green-800 rounded-full shadow-lg hover:shadow-xl transition-all"
+        className="bg-mallow-gray-light hover:bg-mallow-gray-light/90 text-slate-600 rounded-full shadow-md hover:shadow-lg transition-all"
         aria-label="Scroll to top"
       >
         <ArrowUp size={20} />
@@ -52,7 +52,7 @@ const ScrollButtons = () => {
       <Button 
         onClick={scrollToBottom}
         size="icon"
-        className="bg-mallow-gold hover:bg-mallow-gold/90 text-amber-800 rounded-full shadow-lg hover:shadow-xl transition-all"
+        className="bg-mallow-gray-light hover:bg-mallow-gray-light/90 text-slate-600 rounded-full shadow-md hover:shadow-lg transition-all"
         aria-label="Scroll to bottom"
       >
         <ArrowDown size={20} />
